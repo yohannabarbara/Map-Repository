@@ -1,4 +1,3 @@
-// src/pages/NovaDenuncia.js
 import React from 'react';
 import DenunciaForm from '../components/DenunciaForm';
 
