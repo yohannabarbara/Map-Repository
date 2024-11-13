@@ -46,7 +46,7 @@ public class DenunciaController {
     @PostMapping
     public ResponseEntity<Denuncia> criar(@Valid @RequestBody Denuncia denuncia) {
         Denuncia clonedDenuncia = DenunciaPrototype.clone(denuncia);  // Clonando a denúncia antes de salvar
-        Denuncia savedDenuncia = service.save(clonedDenuncia);
+        Denuncia savedDenuncia = service.saveDenuncia(clonedDenuncia);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedDenuncia);
     }
 

@@ -46,18 +46,24 @@ public class DenunciaService {
         return denunciaRepository.findById(id).orElseThrow(() -> new RuntimeException("Denúncia não encontrada"));
     }
 
-    public Denuncia save(Denuncia denuncia) {
+    public void save(Denuncia denuncia) {
+        Command saveCommand = DenunciaCommands.saveCommand(this, denuncia);
+        saveCommand.execute();
+    }
+
+    public Denuncia saveDenuncia(Denuncia denuncia) {
         Denuncia enhancedDenuncia = decorator.enhance(denuncia);  // Decorando a denúncia
         return denunciaRepository.save(enhancedDenuncia);
     }
 
     public Denuncia update(Long id, Denuncia denunciaAtualizada) {
+        Denuncia enhancedDenuncia = decorator.enhance(denunciaAtualizada);  // Decorando a denúncia
         Denuncia denuncia = findById(id);
-        denuncia.setTitulo(denunciaAtualizada.getTitulo());
-        denuncia.setDescricao(denunciaAtualizada.getDescricao());
-        denuncia.setLocalizacao(denunciaAtualizada.getLocalizacao());
-        denuncia.setData(denunciaAtualizada.getData());
-        denuncia.setGrauImportancia(denunciaAtualizada.getGrauImportancia());
+        denuncia.setTitulo(enhancedDenuncia.getTitulo());
+        denuncia.setDescricao(enhancedDenuncia.getDescricao());
+        denuncia.setLocalizacao(enhancedDenuncia.getLocalizacao());
+        denuncia.setData(enhancedDenuncia.getData());
+        denuncia.setGrauImportancia(enhancedDenuncia.getGrauImportancia());
         return denunciaRepository.save(denuncia);
     }
 

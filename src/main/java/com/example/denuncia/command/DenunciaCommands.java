@@ -5,7 +5,7 @@ import com.example.denuncia.service.DenunciaService;
 
 public class DenunciaCommands {
     public static Command saveCommand(DenunciaService service, Denuncia denuncia) {
-        return () -> service.save(denuncia);
+        return () -> service.saveDenuncia(denuncia);
     }
 
     public static Command deleteCommand(DenunciaService service, Long id) {
